@@ -1,33 +1,3 @@
-# variable "aws_profile" {
-#   description = "Profile from AWS"
-#   type        = string
-# }
-
-variable "aws_region" {
-  description = "The AWS region where the resources will be provisioned"
-  type        = string
-  default     = "us-east-1"
-  sensitive   = false
-}
-
-variable "aws_access_key" {
-  description = "The AWS access key"
-  type        = string
-  sensitive   = true
-}
-
-variable "aws_secret_key" {
-  description = "The AWS secret key"
-  type        = string
-  sensitive   = true
-}
-
-variable "aws_session_token" {
-  description = "The AWS session token"
-  type        = string
-  sensitive   = true
-}
-
 variable "node_role_arn" {
   description = "ARN of the IAM Role that will be associated with the Node Group"
   type        = string
@@ -82,4 +52,10 @@ variable "image_version" {
   description = "The version of the image to deploy"
   type        = string
   default     = "latest"
+}
+
+variable "datatabase_lanchonete_api_name" {
+  description = "Nome do database do projeto."
+  default     = "lanchonete_db"
+  type        = string
 }
