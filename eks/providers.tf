@@ -11,8 +11,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "lanchonete-api"
-    key    = "lanchonete-api/eks.tfstate"
+    bucket = "lanchonete-bucket"
+    key    = "lanchonete-bucket/eks.tfstate"
     region = "us-east-1"
   }
 
