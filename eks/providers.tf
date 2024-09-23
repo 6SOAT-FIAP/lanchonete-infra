@@ -22,7 +22,7 @@ terraform {
 # We don't define the provider's credentials here because we are using the AWS CLI to authenticate.
 # https://registry.terraform.io/providers/hashicorp/aws/5.65.0/docs?utm_content=documentLink&utm_medium=Visual+Studio+Code&utm_source=terraform-ls#environment-variables
 provider "aws" {
-  region = 'us-east-1'
+  region = "us-east-1"
 }
 
 provider "kubernetes" {
