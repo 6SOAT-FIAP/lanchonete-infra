@@ -59,3 +59,9 @@ variable "datatabase_lanchonete_api_name" {
   default     = "lanchonete_db"
   type        = string
 }
+
+variable "projectName" {
+  description = "Nome do projeto."
+  default     = "lanchonete-api"
+  type        = string
+}
