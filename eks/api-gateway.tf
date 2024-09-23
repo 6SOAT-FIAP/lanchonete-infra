@@ -167,7 +167,7 @@ resource "aws_api_gateway_method_settings" "rest_api" {
 
 resource "aws_iam_role_policy" "ecs_role_policy" {
   name = "ecs_role_api_gateway_access"
-  role = var.node_role_arn
+  role = var.lab_role_name
 
   policy = jsonencode({
     Version   = "2012-10-17"
