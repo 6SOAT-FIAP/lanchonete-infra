@@ -17,8 +17,8 @@ resource "aws_eks_cluster" "lanchonete_api_cluster" {
       data.aws_subnet.existing_subnet4.id
     ]
     #    security_group_ids = [aws_security_group.lanchonete_api_eks_sg.id]
-    security_groups  = [data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id]
-    assign_public_ip = true
+    security_group_ids     = [data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id]
+    endpoint_public_access = true
   }
 
   tags = {
