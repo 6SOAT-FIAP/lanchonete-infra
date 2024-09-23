@@ -11,12 +11,10 @@ resource "aws_eks_cluster" "lanchonete_api_cluster" {
     #      aws_subnet.lanchonete_api_private_subnet_2.id
     #    ]
     subnet_ids = [
-      [
-        data.aws_subnet.existing_subnet1.id,
-        data.aws_subnet.existing_subnet2.id,
-        data.aws_subnet.existing_subnet3.id,
-        data.aws_subnet.existing_subnet4.id
-      ]
+      data.aws_subnet.existing_subnet1.id,
+      data.aws_subnet.existing_subnet2.id,
+      data.aws_subnet.existing_subnet3.id,
+      data.aws_subnet.existing_subnet4.id
     ]
     #    security_group_ids = [aws_security_group.lanchonete_api_eks_sg.id]
     security_groups  = [data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id]
