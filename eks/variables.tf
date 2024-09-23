@@ -62,7 +62,7 @@ variable "image_version" {
 
 variable "datatabase_lanchonete_api_name" {
   description = "Nome do database do projeto"
-  default     = "lanchonete_db"
+  default     = "rds-lanchonete-api"
   type        = string
 }
 
