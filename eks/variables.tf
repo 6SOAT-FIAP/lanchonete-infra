@@ -21,7 +21,7 @@ variable "environment" {
 variable "kubernetes_namespace" {
   description = "The Kubernetes namespace where the resources will be provisioned"
   type        = string
-  default     = "default"
+  default     = "lanchonete"
 }
 
 variable "cluster_name" {

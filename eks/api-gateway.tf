@@ -150,7 +150,7 @@ resource "aws_api_gateway_deployment" "rest_api" {
 resource "aws_api_gateway_stage" "rest_api" {
   deployment_id = aws_api_gateway_deployment.rest_api.id
   rest_api_id   = aws_api_gateway_rest_api.rest_api.id
-  stage_name    = "dev"
+  stage_name    = "default"
 }
 
 resource "aws_api_gateway_method_settings" "rest_api" {
