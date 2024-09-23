@@ -46,10 +46,6 @@ data "aws_db_instance" "database" {
   db_instance_identifier = var.datatabase_lanchonete_api_name
 }
 
-data "aws_vpc_endpoint" "vpc_endpoint" {
-  service_name = "com.amazonaws.sa-east-1.execute-api"
-}
-
 data "aws_subnet" "cluster-vpc-subnet-private-1" {
   tags = {
     Name = "subnet-private-lanchonete-api-1"
