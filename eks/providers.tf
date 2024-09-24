@@ -26,11 +26,11 @@ provider "aws" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = aws_eks_cluster.lanchonete-api
+  name = aws_eks_cluster.lanchonete-api.id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = aws_eks_cluster.lanchonete-api
+  name = aws_eks_cluster.lanchonete-api.id
 }
 
 data "aws_eks_cluster" "kubeconfig-certificate-authority-data" {
