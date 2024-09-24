@@ -161,23 +161,23 @@ resource "aws_api_gateway_method_settings" "rest_api" {
 
 # POLICY
 
-resource "aws_iam_role_policy" "ecs_role_policy" {
-  name = "ecs_role_api_gateway_access"
-  role = var.lab_role_name
-
-  policy = jsonencode({
-    Version   = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "execute-api:Invoke"
-        ]
-        Effect   = "Allow"
-        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
-      }
-    ]
-  })
-}
+#resource "aws_iam_role_policy" "ecs_role_policy" {
+#  name = "ecs_role_api_gateway_access"
+#  role = var.lab_role_name
+#
+#  policy = jsonencode({
+#    Version   = "2012-10-17"
+#    Statement = [
+#      {
+#        Action = [
+#          "execute-api:Invoke"
+#        ]
+#        Effect   = "Allow"
+#        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
+#      }
+#    ]
+#  })
+#}
 
 resource "aws_api_gateway_rest_api_policy" "api_gateway_policy" {
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
