@@ -1,14 +1,15 @@
 #If you want to create a new namespace, uncomment the code below
-resource "kubernetes_namespace" "lanchonete_api_namespace" {
-  metadata {
-    name = var.kubernetes_namespace
-  }
-}
+#resource "kubernetes_namespace" "lanchonete_api_namespace" {
+#  metadata {
+#    name = var.kubernetes_namespace
+#  }
+#}
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
     name      = var.cluster_name
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+#    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
   }
 
   spec {
@@ -72,7 +73,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
     name        = var.cluster_name
-    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
@@ -100,8 +102,8 @@ resource "kubernetes_service" "lanchonete_api_service" {
 resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
   metadata {
     name      = "ingress-lanchonete-api"
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    # namespace = var.kubernetes_namespace
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace    # namespace = var.kubernetes_namespace
   }
 
   # depends_on = [kubernetes_service.lanchonete_api_service]
