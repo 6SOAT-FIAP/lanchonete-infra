@@ -40,8 +40,9 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
         }
 
         container {
-          name  = "lanchonete"
-          image = "luhanlacerda/lanchonete-api:${var.image_version}"
+          name              = "lanchonete"
+          image             = "638385053556.dkr.ecr.us-east-1.amazonaws.com/lanchonete-api:latest"
+          image_pull_policy = "Always"
 
           resources {
             limits = {
