@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "lanchonete_api_namespace" {
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
-    name      = "deployment-lanchonete-api"
+    name      = "lanchonete-api"
     namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
     #namespace = var.kubernetes_namespace
     # namespace = "default"
@@ -16,14 +16,14 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
   spec {
     selector {
       match_labels = {
-        app = "deployment-lanchonete-api"
+        app = "lanchonete-api"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "deployment-lanchonete-api"
+          app = "lanchonete-api"
         }
       }
 
@@ -73,7 +73,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
-    name        = "service-lanchonete-api"
+    name        = "lanchonete-api"
     namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
     # namespace   = var.kubernetes_namespace
     # namespace = "default"
@@ -88,7 +88,7 @@ resource "kubernetes_service" "lanchonete_api_service" {
   }
   spec {
     selector = {
-      app = "deployment-lanchonete-api"
+      app = "lanchonete-api"
     }
     port {
       # port        = 80
