@@ -25,10 +25,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+
 provider "kubernetes" {
   host                   = aws_eks_cluster.lanchonete-api.endpoint
   cluster_ca_certificate = base64decode(aws_eks_cluster.lanchonete-api.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.lanchonete-api_auth.token
+  token                  = aws_eks_cluster.lanchonete-api.token
 
   # For standard kubeconfig-based authentication:
   # config_path = "~/.kube/config"
