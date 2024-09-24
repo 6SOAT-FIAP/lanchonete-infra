@@ -4,20 +4,16 @@ resource "aws_eks_cluster" "lanchonete_api_cluster" {
   role_arn = var.node_role_arn
 
   vpc_config {
-    #    subnet_ids = [
-    #      aws_subnet.lanchonete_api_public_subnet_1.id,
-    #      aws_subnet.lanchonete_api_public_subnet_2.id,
-    #      aws_subnet.lanchonete_api_private_subnet_1.id,
-    #      aws_subnet.lanchonete_api_private_subnet_2.id
-    #    ]
     subnet_ids = [
       data.aws_subnet.existing_subnet1.id,
       data.aws_subnet.existing_subnet2.id,
       data.aws_subnet.existing_subnet3.id,
       data.aws_subnet.existing_subnet4.id
     ]
-    #    security_group_ids = [aws_security_group.lanchonete_api_eks_sg.id]
-    security_group_ids     = [data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id]
+    security_group_ids = [
+      data.terraform_remote_state.other_repo.outputs.private_subnet_sg_id,
+      data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id
+    ]
     endpoint_public_access = true
   }
 
