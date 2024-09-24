@@ -7,23 +7,21 @@ resource "kubernetes_namespace" "lanchonete_api_namespace" {
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
-    name      = "lanchonete-api"
+    name      = var.cluster_name
     namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
-    # namespace = "default"
   }
 
   spec {
     selector {
       match_labels = {
-        app = "lanchonete-api"
+        app = var.cluster_name
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "lanchonete-api"
+          app = var.cluster_name
         }
       }
 
@@ -73,10 +71,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
-    name        = "lanchonete-api"
+    name        = var.cluster_name
     namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    # namespace   = var.kubernetes_namespace
-    # namespace = "default"
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",

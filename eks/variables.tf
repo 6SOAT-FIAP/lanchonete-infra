@@ -27,7 +27,7 @@ variable "kubernetes_namespace" {
 variable "cluster_name" {
   description = "Name of the EKS Cluster"
   type        = string
-  default     = "lanchonete-eks"
+  default     = "lanchonete-api"
 }
 
 variable "availability_zones" {
@@ -70,4 +70,19 @@ variable "projectName" {
   description = "Nome do projeto."
   default     = "lanchonete-api"
   type        = string
+}
+
+variable "public_sn_count" {
+  default = 2
+  type    = number
+}
+
+variable "public_cidrs" {
+  type    = list(string)
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+variable "vpc_cidr" {
+  type    = string
+  default = "10.0.0.0/16"
 }
