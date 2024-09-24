@@ -5,6 +5,12 @@ variable "node_role_arn" {
   default     = "arn:aws:iam::638385053556:role/LabRole"
 }
 
+variable "lab_role_name" {
+  description = "Name of the IAM Role that will be associated with the Node Group"
+  type        = string
+  default     = "LabRole"
+}
+
 variable "environment" {
   description = "The environment of the application"
   type        = string
@@ -15,7 +21,7 @@ variable "environment" {
 variable "kubernetes_namespace" {
   description = "The Kubernetes namespace where the resources will be provisioned"
   type        = string
-  default     = "default"
+  default     = "lanchonete"
 }
 
 variable "cluster_name" {
@@ -55,7 +61,13 @@ variable "image_version" {
 }
 
 variable "datatabase_lanchonete_api_name" {
-  description = "Nome do database do projeto."
-  default     = "lanchonete_db"
+  description = "Nome do database do projeto"
+  default     = "rds-lanchonete-api"
+  type        = string
+}
+
+variable "projectName" {
+  description = "Nome do projeto."
+  default     = "lanchonete-api"
   type        = string
 }

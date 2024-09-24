@@ -1,15 +1,15 @@
-# If you want to create a new namespace, uncomment the code below
-# resource "kubernetes_namespace" "lanchonete_api_namespace" {
-#   metadata {
-#     name = var.kubernetes_namespace
-#   }
-# }
+#If you want to create a new namespace, uncomment the code below
+resource "kubernetes_namespace" "lanchonete_api_namespace" {
+  metadata {
+    name = var.kubernetes_namespace
+  }
+}
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
-    name = "deployment-lanchonete-api"
-    # namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace = var.kubernetes_namespace
+    name      = "deployment-lanchonete-api"
+    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    #namespace = var.kubernetes_namespace
     # namespace = "default"
   }
 
@@ -72,9 +72,9 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
-    name = "service-lanchonete-api"
-    # namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace = var.kubernetes_namespace
+    name        = "service-lanchonete-api"
+    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    # namespace   = var.kubernetes_namespace
     # namespace = "default"
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
@@ -102,9 +102,9 @@ resource "kubernetes_service" "lanchonete_api_service" {
 # So let's use kubernetes_ingress_v1 instead of kubernetes_ingress
 resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
   metadata {
-    name = "ingress-lanchonete-api"
-    # namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace = var.kubernetes_namespace
+    name      = "ingress-lanchonete-api"
+    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    # namespace = var.kubernetes_namespace
   }
 
   # depends_on = [kubernetes_service.lanchonete_api_service]
