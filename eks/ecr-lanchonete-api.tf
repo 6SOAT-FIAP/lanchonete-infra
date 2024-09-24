@@ -40,10 +40,9 @@ resource "null_resource" "push_image_lanchonete_api_to_ecr" {
     #command = "aws ecr get-login-password | docker login --username AWS --password-stdin 638385053556.dkr.ecr.us-east-1.amazonaws.com && docker build -t 638385053556.dkr.ecr.us-east-1.amazonaws.com/lanchonete-api:latest ../../ && docker push 638385053556.dkr.ecr.us-east-1.amazonaws.com/lanchonete-api:latest"
 
     command     = <<-EOT
-      cd ..
       aws ecr get-login-password | docker login --username AWS --password-stdin 638385053556.dkr.ecr.us-east-1.amazonaws.com
       mkdir -p ./temp_repo_lanchonete_api  # Cria diretório temporário exclusivo para a api da lanchonete
-      cd ./temp_repo_lanchonete_api || exit 1
+      cd ./temp_repo_lanchonete_api || exit 2
       git clone https://github.com/6SOAT-FIAP/lanchonete-api ./lanchonete-api-repo
       cd ./lanchonete-api-repo || exit 1
       docker build -t 638385053556.dkr.ecr.us-east-1.amazonaws.com/lanchonete-api:latest .
