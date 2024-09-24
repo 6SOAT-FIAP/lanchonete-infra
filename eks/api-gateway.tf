@@ -99,9 +99,7 @@ resource "aws_api_gateway_rest_api" "rest_api" {
             type                 = "HTTP_PROXY"
             uri                  = "http://${aws_lb.alb.dns_name}/api/v1/produto/{id}"
           }
-        }
-      },
-      "/produto/{id}" = {
+        },
         delete = {
           x-amazon-apigateway-integration = {
             httpMethod           = "DELETE"
