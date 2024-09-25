@@ -39,7 +39,7 @@ resource "aws_eks_node_group" "lanchonete-api" {
     min_size     = 1
   }
 
-  instance_types = "t3.medium"
+  instance_types = ["t3.medium"]
   disk_size      = 20
   ami_type       = "AL2_x86_64"
   depends_on     = [aws_eks_cluster.lanchonete-api]
