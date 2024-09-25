@@ -45,8 +45,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
           resources {
             limits = {
-              memory = "128Mi"
-              cpu    = "500m"
+              cpu    = "2"
+              memory = "2048Mi"
             }
           }
 
