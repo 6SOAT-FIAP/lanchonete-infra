@@ -9,9 +9,6 @@ resource "aws_eks_cluster" "lanchonete-api" {
     endpoint_private_access = false
     public_access_cidrs     = ["0.0.0.0/0"]
     security_group_ids      = [
-      data.terraform_remote_state.other_repo.outputs.private_subnet_sg_id,
-      data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id,
-      data.terraform_remote_state.other_repo.outputs.aws_security_group_rds,
       aws_security_group.node_group_one.id
     ]
   }
