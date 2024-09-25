@@ -33,12 +33,8 @@ data "aws_eks_cluster_auth" "cluster" {
   name = aws_eks_cluster.lanchonete-api.id
 }
 
-data "aws_eks_cluster" "kubeconfig-certificate-authority-data" {
-  name = aws_eks_cluster.lanchonete-api.certificate_authority[0].data
-}
-
 provider "kubernetes" {
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.kubeconfig-certificate-authority-data)
+  cluster_ca_certificate = base64decode(aws_eks_cluster.lanchonete-api.certificate_authority[0].data)
   host                   = data.aws_eks_cluster.cluster.endpoint
   token                  = data.aws_eks_cluster_auth.cluster.token
 
