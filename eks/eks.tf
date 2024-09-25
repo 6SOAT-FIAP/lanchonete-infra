@@ -13,7 +13,7 @@ resource "aws_eks_cluster" "lanchonete-api" {
     ]
   }
 
-#  depends_on = [aws_lb.alb]
+  #  depends_on = [aws_lb.alb]
 }
 
 data "aws_eks_cluster_auth" "lanchonete-api_auth" {
@@ -26,10 +26,12 @@ resource "aws_eks_node_group" "lanchonete-api" {
   node_group_name = var.cluster_name
   subnet_ids      = aws_subnet.public_lanchonete-api_subnet.*.id
   instance_types  = ["t3.medium"]
+  disk_size       = 20
+  ami_type        = "AL2_x86_64"
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
+    desired_size = 2
+    max_size     = 5
     min_size     = 1
   }
 
