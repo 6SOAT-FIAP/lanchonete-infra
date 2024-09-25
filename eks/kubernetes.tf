@@ -54,34 +54,22 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
             container_port = 3000
           }
 
-          # liveness_probe {
-          #   http_get {
-          #     path = "/"
-          #     port = 3000
-          #   }
-          #   initial_delay_seconds = 3
-          #   period_seconds        = 3
-          # }
         }
       }
     }
   }
 
-  # depends_on = [kubernetes_pod.lanchonete_api_pod]
 }
 
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
     name        = var.cluster_name
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
     #namespace = var.kubernetes_namespace
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
       "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled" : "true"
-      # "service.beta.kubernetes.io/aws-load-balancer-type" : "external",
-      # "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type" : "ip",
-      # "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internet-facing"
     }
   }
   spec {
@@ -89,7 +77,6 @@ resource "kubernetes_service" "lanchonete_api_service" {
       app = "lanchonete-api"
     }
     port {
-      # port        = 80
       port        = 3000
       target_port = 3000
     }

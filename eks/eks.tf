@@ -25,11 +25,11 @@ resource "aws_eks_node_group" "lanchonete-api" {
   node_role_arn   = var.node_role_arn
   node_group_name = var.cluster_name
   subnet_ids      = aws_subnet.public_lanchonete-api_subnet.*.id
-  instance_types  = ["t2.micro"]
+  instance_types  = ["t3.medium"]
 
   scaling_config {
     desired_size = 1
-    max_size     = 2
+    max_size     = 1
     min_size     = 1
   }
 
