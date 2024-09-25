@@ -13,7 +13,7 @@ resource "aws_eks_cluster" "lanchonete-api" {
     ]
   }
 
-  depends_on = [aws_lb.alb]
+#  depends_on = [aws_lb.alb]
 }
 
 data "aws_eks_cluster_auth" "lanchonete-api_auth" {
