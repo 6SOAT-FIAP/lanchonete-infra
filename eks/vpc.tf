@@ -47,9 +47,6 @@ resource "aws_vpc" "lanchonete-api_vpc" {
     Name = "lanchonete-api_vpc"
   }
 
-  lifecycle {
-    prevent_destroy = false
-  }
 }
 
 # Public Subnet - 1
@@ -64,9 +61,6 @@ resource "aws_subnet" "lanchonete-api_public_subnet_1" {
     Name = "lanchonete-api_public_subnet_1"
   }
 
-  lifecycle {
-    prevent_destroy = false
-  }
 }
 
 # Public Subnet - 2
@@ -88,10 +82,6 @@ resource "aws_subnet" "lanchonete-api_private_subnet_1" {
 
   tags = {
     Name = "lanchonete-api_private_subnet_1"
-  }
-
-  lifecycle {
-    prevent_destroy = false
   }
 }
 
