@@ -4,7 +4,13 @@ resource "aws_eks_cluster" "lanchonete-api" {
   role_arn = var.node_role_arn
 
   vpc_config {
-    subnet_ids              = aws_subnet.public_lanchonete-api_subnet.*.id
+    #    subnet_ids              = aws_subnet.public_lanchonete-api_subnet.*.id
+    subnet_ids = [
+      aws_subnet.lanchonete-api_public_subnet_1.id,
+      aws_subnet.lanchonete-api_public_subnet_2.id,
+      aws_subnet.lanchonete-api_private_subnet_1.id,
+      aws_subnet.lanchonete-api_private_subnet_2.id
+    ]
     endpoint_public_access  = true
     endpoint_private_access = false
     public_access_cidrs     = ["0.0.0.0/0"]
@@ -13,7 +19,6 @@ resource "aws_eks_cluster" "lanchonete-api" {
     ]
   }
 
-  #  depends_on = [aws_lb.alb]
 }
 
 data "aws_eks_cluster_auth" "lanchonete-api_auth" {
@@ -24,16 +29,20 @@ resource "aws_eks_node_group" "lanchonete-api" {
   cluster_name    = aws_eks_cluster.lanchonete-api.name
   node_role_arn   = var.node_role_arn
   node_group_name = var.cluster_name
-  subnet_ids      = aws_subnet.public_lanchonete-api_subnet.*.id
-  instance_types  = ["t3.medium"]
-  disk_size       = 20
-  ami_type        = "AL2_x86_64"
+  #  subnet_ids      = aws_subnet.public_lanchonete-api_subnet.*.id
+  subnet_ids      = [aws_subnet.lanchonete-api_private_subnet_1.id, aws_subnet.lanchonete-api_private_subnet_2.id]
+  #  instance_types  = ["t2.micro"]
 
   scaling_config {
     desired_size = 2
     max_size     = 5
     min_size     = 1
   }
+
+  instance_types = "t3.medium"
+  disk_size      = 20
+  ami_type       = "AL2_x86_64"
+  depends_on     = [aws_eks_cluster.lanchonete-api]
 
 }
 

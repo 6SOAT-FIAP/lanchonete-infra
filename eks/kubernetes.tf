@@ -93,8 +93,6 @@ resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
     #namespace = var.kubernetes_namespace
   }
 
-  # depends_on = [kubernetes_service.lanchonete_api_service]
-
   spec {
     default_backend {
       service {
