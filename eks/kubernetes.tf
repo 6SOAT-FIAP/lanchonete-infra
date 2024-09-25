@@ -1,15 +1,15 @@
 #If you want to create a new namespace, uncomment the code below
-resource "kubernetes_namespace" "lanchonete_api_namespace" {
-  metadata {
-    name = var.kubernetes_namespace
-  }
-}
+#resource "kubernetes_namespace" "lanchonete_api_namespace" {
+#  metadata {
+#    name = var.kubernetes_namespace
+#  }
+#}
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
     name      = var.cluster_name
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
   }
 
   spec {
@@ -40,7 +40,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
         container {
           name              = "lanchonete"
-          image             = "lanchonete-api:latest"
+          image             = "638385053556.dkr.ecr.us-east-1.amazonaws.com/lanchonete-api:latest"
           image_pull_policy = "Always"
 
           resources {
@@ -64,8 +64,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
     name        = var.cluster_name
-    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace   = var.kubernetes_namespace
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
@@ -89,8 +89,8 @@ resource "kubernetes_service" "lanchonete_api_service" {
 resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
   metadata {
     name      = "ingress-lanchonete-api"
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
   }
 
   spec {
