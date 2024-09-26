@@ -40,8 +40,8 @@ resource "aws_eks_node_group" "lanchonete-api" {
     min_size     = 1
   }
 
-  force_destroy = true
   lifecycle {
+    create_before_destroy = false
     prevent_destroy = false
   }
 
