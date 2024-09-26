@@ -18,6 +18,10 @@ resource "aws_eks_cluster" "lanchonete-api" {
       aws_security_group.node_group_one.id
     ]
   }
+  lifecycle {
+    create_before_destroy = false
+    prevent_destroy = false
+  }
 
 }
 
