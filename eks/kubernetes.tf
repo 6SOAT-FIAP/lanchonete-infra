@@ -54,14 +54,14 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
             container_port = 8080
           }
 
-           liveness_probe {
-             http_get {
-               path = "/swagger-ui"
-               port = 3000
-             }
-             initial_delay_seconds = 3
-             period_seconds        = 3
-           }
+          liveness_probe {
+            http_get {
+              path = "/swagger-ui/"
+              port = 8080
+            }
+            initial_delay_seconds = 180
+            period_seconds        = 3
+          }
 
         }
       }
@@ -86,8 +86,8 @@ resource "kubernetes_service" "lanchonete_api_service" {
       app = "lanchonete-api"
     }
     port {
-      port        = 3000
-      target_port = 8080
+      port      = 8080
+      node_port = 3000
     }
     type = "LoadBalancer"
   }
