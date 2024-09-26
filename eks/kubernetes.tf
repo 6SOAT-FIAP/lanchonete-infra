@@ -57,7 +57,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
            liveness_probe {
              http_get {
                path = "/swagger-ui"
-               port = 8080
+               port = 3000
              }
              initial_delay_seconds = 3
              period_seconds        = 3
