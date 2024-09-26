@@ -31,12 +31,12 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
         // 0/2 nodes are available: 2 node(s) were unschedulable.
         // preemption: 0/2 nodes are available: 2
         // Preemption is not helpful for scheduling.
-        toleration {
-          key      = "key"
-          operator = "Equal"
-          value    = "value"
-          effect   = "NoSchedule"
-        }
+#        toleration {
+#          key      = "key"
+#          operator = "Equal"
+#          value    = "value"
+#          effect   = "NoSchedule"
+#        }
 
         container {
           name              = "lanchonete"

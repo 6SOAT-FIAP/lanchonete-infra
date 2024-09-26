@@ -44,11 +44,6 @@ resource "aws_eks_node_group" "lanchonete-api" {
     min_size     = 1
   }
 
-  lifecycle {
-    create_before_destroy = false
-    prevent_destroy       = false
-  }
-
 }
 
 resource "aws_security_group" "node_group_one" {
