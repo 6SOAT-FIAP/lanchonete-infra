@@ -87,7 +87,7 @@ resource "kubernetes_service" "lanchonete_api_service" {
     }
     port {
       port      = 8080
-      node_port = 3000
+      node_port = 30000
     }
     type = "LoadBalancer"
   }
