@@ -44,9 +44,9 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
           image_pull_policy = "Always"
 
           resources {
-            limits = {
-              cpu    = "2000Mi"
-              memory = "1000Mi"
+            requests = {
+              cpu    = "1000m"
+              memory = "1000m"
             }
           }
 
