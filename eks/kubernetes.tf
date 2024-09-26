@@ -12,6 +12,11 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
     #namespace = var.kubernetes_namespace
   }
 
+  lifecycle {
+    create_before_destroy = false
+    prevent_destroy       = false
+  }
+
   spec {
     selector {
       match_labels = {
@@ -45,7 +50,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
           resources {
             requests = {
-              cpu    = "5000m"
+              cpu    = "6000m"
               memory = "1000m"
             }
           }
