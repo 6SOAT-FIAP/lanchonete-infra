@@ -12,7 +12,48 @@ env:
   AWS_REGION: 'us-east-1'
 
 jobs:
+  destroy:
+    name: 'Destroy EKS'
+    runs-on: ubuntu-latest
+
+    env:
+      TF_WORKING_DIR: './eks'
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: TF_LOG=DEBUG terraform plan -out terraform.plan
+        continue-on-error: true
+
+      - name: Terraform Destroy
+        id: destroy
+        run: terraform destroy terraform.plan
   deploy:
+    needs: destroy
     name: 'Deploy EKS'
     runs-on: ubuntu-latest
 
