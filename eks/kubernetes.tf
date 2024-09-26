@@ -45,7 +45,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
           resources {
             requests = {
-              cpu    = "2000m"
+              cpu    = "3000m"
               memory = "1000m"
             }
           }
