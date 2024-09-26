@@ -45,14 +45,23 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
           resources {
             limits = {
-              cpu    = "2"
-              memory = "2048Mi"
+              cpu    = "1000Mi"
+              memory = "1000Mi"
             }
           }
 
           port {
-            container_port = 3000
+            container_port = 8080
           }
+
+           liveness_probe {
+             http_get {
+               path = "/swagger-ui"
+               port = 8080
+             }
+             initial_delay_seconds = 3
+             period_seconds        = 3
+           }
 
         }
       }
@@ -78,7 +87,7 @@ resource "kubernetes_service" "lanchonete_api_service" {
     }
     port {
       port        = 3000
-      target_port = 3000
+      target_port = 8080
     }
     type = "LoadBalancer"
   }

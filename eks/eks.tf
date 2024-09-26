@@ -34,8 +34,8 @@ resource "aws_eks_node_group" "lanchonete-api" {
   #  instance_types  = ["t2.micro"]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 5
+    desired_size = 1
+    max_size     = 2
     min_size     = 1
   }
 
@@ -53,6 +53,20 @@ resource "aws_security_group" "node_group_one" {
   ingress {
     from_port = 80
     to_port   = 80
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 8080
+    to_port   = 8080
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 3000
+    to_port   = 3000
     protocol  = "tcp"
 
     cidr_blocks = ["0.0.0.0/0"]
