@@ -8,8 +8,8 @@ resource "kubernetes_namespace" "lanchonete_api_namespace" {
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
     name      = var.cluster_name
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
   }
 
   lifecycle {
@@ -36,8 +36,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
         // preemption: 0/2 nodes are available: 2
         // Preemption is not helpful for scheduling.
         toleration {
-          key      = "node-role.kubernetes.io/control-plane"
-          effect   = "NoSchedule"
+          key    = "node-role.kubernetes.io/control-plane"
+          effect = "NoSchedule"
         }
         restart_policy = "Always"
         container {
@@ -46,10 +46,10 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
           image_pull_policy = "Always"
 
           resources {
-#            requests = {
-#              cpu    = "2000m"
-#              memory = "2000m"
-#            }
+            #            requests = {
+            #              cpu    = "2000m"
+            #              memory = "2000m"
+            #            }
             limits = {
               memory = "128Mi"
               cpu    = "500m"
@@ -79,8 +79,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
     name        = var.cluster_name
-    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace   = var.kubernetes_namespace
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
@@ -104,8 +104,8 @@ resource "kubernetes_service" "lanchonete_api_service" {
 resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
   metadata {
     name      = "ingress-lanchonete-api"
-    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    #namespace = var.kubernetes_namespace
+    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+    namespace = var.kubernetes_namespace
   }
 
   spec {
