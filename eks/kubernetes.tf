@@ -1,9 +1,9 @@
 #If you want to create a new namespace, uncomment the code below
-resource "kubernetes_namespace" "lanchonete_api_namespace" {
-  metadata {
-    name = var.kubernetes_namespace
-  }
-}
+#resource "kubernetes_namespace" "lanchonete_api_namespace" {
+#  metadata {
+#    name = var.kubernetes_namespace
+#  }
+#}
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
