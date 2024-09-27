@@ -13,8 +13,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
   }
 
   lifecycle {
-    create_before_destroy = false
-    prevent_destroy       = false
+    prevent_destroy = false
   }
 
   spec {
@@ -50,7 +49,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
           resources {
             requests = {
               cpu    = "7000m"
-              memory = "2000m"
+              memory = "1000m"
             }
           }
 
