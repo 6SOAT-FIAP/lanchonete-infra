@@ -42,7 +42,6 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 #          value    = "value"
 #          effect   = "NoSchedule"
 #        }
-
         container {
           name              = "lanchonete"
           image             = "luhanlacerda/lanchonete-api:latest"
@@ -50,8 +49,8 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
           resources {
             requests = {
-              cpu    = "6000m"
-              memory = "1000m"
+              cpu    = "7000m"
+              memory = "2000m"
             }
           }
 
