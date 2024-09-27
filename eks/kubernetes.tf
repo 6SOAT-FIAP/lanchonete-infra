@@ -39,7 +39,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
           key      = "node-role.kubernetes.io/control-plane"
           effect   = "NoSchedule"
         }
-        restart_policy = "OnFailure"
+        restart_policy = "Always"
         container {
           name              = "lanchonete"
           image             = "luhanlacerda/lanchonete-api:latest"
