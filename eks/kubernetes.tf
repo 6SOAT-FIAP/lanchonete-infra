@@ -36,11 +36,10 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
         // preemption: 0/2 nodes are available: 2
         // Preemption is not helpful for scheduling.
         toleration {
-          key      = "key"
-          operator = "Equal"
-          value    = "value"
+          key      = "node-role.kubernetes.io/control-plane"
           effect   = "NoSchedule"
         }
+        restart_policy = "OnFailure"
         container {
           name              = "lanchonete"
           image             = "luhanlacerda/lanchonete-api:latest"
