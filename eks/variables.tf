@@ -24,12 +24,6 @@ variable "cluster_name" {
   default     = "lanchonete-api"
 }
 
-variable "availability_zones" {
-  description = "List of availability zones where the subnets will be created"
-  type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
-}
-
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
@@ -43,21 +37,6 @@ variable "datatabase_lanchonete_api_name" {
   type        = string
 }
 
-variable "public_sn_count" {
-  default = 2
-  type    = number
-}
-
-variable "public_cidrs" {
-  type    = list(string)
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
-}
-
-variable "vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
 variable "principalArn" {
   default = "arn:aws:iam::257266759997:role/voclabs"
 }
@@ -68,4 +47,8 @@ variable "policyArn" {
 
 variable "accessConfig" {
   default = "API_AND_CONFIG_MAP"
+}
+
+variable "awsRegion" {
+  default = "us-east-1"
 }
