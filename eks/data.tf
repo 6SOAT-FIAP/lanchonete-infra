@@ -13,6 +13,10 @@ data "aws_subnets" "subnets"{
   }
 }
 
+data "aws_subnet" "subnet" {
+  for_each = toset(data.aws_subnets.subnets.ids)
+  id       = each.value
+}
 
 # Não funciona pq n temos permissão no aws academy
 #data "aws_iam_role" "labRole"{

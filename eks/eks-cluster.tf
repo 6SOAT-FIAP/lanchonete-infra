@@ -4,12 +4,12 @@ resource "aws_eks_cluster" "lanchonete-api" {
   role_arn = var.node_role_arn
 
   vpc_config {
-    subnet_ids         = [for subnet in data.aws_subnets.subnets : subnet_id if subnet_availability_zone != "${var.awsRegion}e"]
+    subnet_ids         = [for subnet in data.aws_subnet.subnet : subnet.id if subnet.availability_zone != "us-east-1e"]
     security_group_ids = [aws_security_group.sg.id]
+  }
 
-    access_config {
-      authentication_mode = var.accessConfig
-    }
+  access_config {
+    authentication_mode = var.accessConfig
   }
 }
 
