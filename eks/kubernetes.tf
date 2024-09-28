@@ -78,51 +78,53 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
 resource "kubernetes_service" "lanchonete_api_service" {
   metadata {
-    name        = var.cluster_name
+    name      = var.cluster_name
     #    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace   = var.kubernetes_namespace
-    annotations = {
-      "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
-      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
-      "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled" : "true"
-    }
+    namespace = var.kubernetes_namespace
+    #    annotations = {
+    #      "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
+    #      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
+    #      "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled" : "true"
+    #    }
   }
   spec {
     selector = {
       app = "lanchonete-api"
     }
     port {
-      port      = 8080
-      node_port = 30000
+      port        = 8080
+      target_port = 8080
+      node_port   = 30000
     }
-    type = "LoadBalancer"
+    #    type = "LoadBalancer"
+    type = "NodePort"
   }
 }
-
-# Failed to create Ingress 'default/ingress-lanchonete-api' because: the server could not find the requested resource (post ingresses.extensions)
-# So let's use kubernetes_ingress_v1 instead of kubernetes_ingress
-resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
-  metadata {
-    name      = "ingress-lanchonete-api"
-    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace = var.kubernetes_namespace
-  }
-
-  spec {
-    default_backend {
-      service {
-        name = kubernetes_service.lanchonete_api_service.metadata[0].name
-        port {
-          number = kubernetes_service.lanchonete_api_service.spec[0].port[0].port
-        }
-      }
-    }
-  }
-}
-
-data "kubernetes_service" "lanchonete_api_service_data" {
-  metadata {
-    name      = kubernetes_service.lanchonete_api_service.metadata[0].name
-    namespace = kubernetes_service.lanchonete_api_service.metadata[0].namespace
-  }
-}
+#
+## Failed to create Ingress 'default/ingress-lanchonete-api' because: the server could not find the requested resource (post ingresses.extensions)
+## So let's use kubernetes_ingress_v1 instead of kubernetes_ingress
+#resource "kubernetes_ingress_v1" "lanchonete_api_ingress" {
+#  metadata {
+#    name      = "ingress-lanchonete-api"
+#    #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+#    namespace = var.kubernetes_namespace
+#  }
+#
+#  spec {
+#    default_backend {
+#      service {
+#        name = kubernetes_service.lanchonete_api_service.metadata[0].name
+#        port {
+#          number = kubernetes_service.lanchonete_api_service.spec[0].port[0].port
+#        }
+#      }
+#    }
+#  }
+#}
+#
+#data "kubernetes_service" "lanchonete_api_service_data" {
+#  metadata {
+#    name      = kubernetes_service.lanchonete_api_service.metadata[0].name
+#    namespace = kubernetes_service.lanchonete_api_service.metadata[0].namespace
+#  }
+#}
