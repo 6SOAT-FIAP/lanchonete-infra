@@ -22,7 +22,7 @@ resource "aws_eks_cluster" "lanchonete-api" {
     prevent_destroy = false
   }
 
-  enabled_cluster_log_types = ["api", "audit", "authenticator","controllerManager","scheduler"]
+  enabled_cluster_log_types = ["api","scheduler"]
 
 }
 
