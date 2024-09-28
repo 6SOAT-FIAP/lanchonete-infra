@@ -39,8 +39,13 @@ provider "kubernetes" {
   #  token                  = data.aws_eks_cluster_auth.cluster.token
   host                   = aws_eks_cluster.lanchonete-api.endpoint
   cluster_ca_certificate = base64decode(aws_eks_cluster.lanchonete-api.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.lanchonete-api_auth.token
+  #  token                  = data.aws_eks_cluster_auth.lanchonete-api_auth.token
 
+  exec {
+    api_version = "client.authentication.k8s.io/v1alpha1"
+    args        = ["eks", "get-token", "--cluster-name", aws_eks_cluster.lanchonete-api.name]
+    command     = "aws"
+  }
   # For standard kubeconfig-based authentication:
   # config_path = "~/.kube/config"
 }
