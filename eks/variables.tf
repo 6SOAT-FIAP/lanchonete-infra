@@ -58,7 +58,10 @@ variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "cluster_version" {
-  type    = string
-  default = "1.31"
+variable "principalArn" {
+  default = "arn:aws:iam::257266759997:role/voclabs"
+}
+
+variable "policyArn" {
+  default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 }
