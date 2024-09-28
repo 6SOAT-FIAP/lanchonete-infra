@@ -12,11 +12,9 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
     namespace = var.kubernetes_namespace
   }
 
-  lifecycle {
-    prevent_destroy = false
-  }
-
   spec {
+
+    replicas = 2
     selector {
       match_labels = {
         app = var.cluster_name
@@ -96,8 +94,7 @@ resource "kubernetes_service" "lanchonete_api_service" {
       target_port = 8080
       node_port   = 30000
     }
-    #    type = "LoadBalancer"
-    type = "NodePort"
+    type = "LoadBalancer"
   }
 }
 #
