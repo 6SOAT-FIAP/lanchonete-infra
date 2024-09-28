@@ -24,6 +24,10 @@ resource "aws_eks_cluster" "lanchonete-api" {
 
   enabled_cluster_log_types = ["api","scheduler"]
 
+  access_config {
+    authentication_mode = var.accessConfig
+  }
+
 }
 
 data "aws_eks_cluster_auth" "lanchonete-api_auth" {
