@@ -17,16 +17,17 @@ resource "aws_eks_cluster" "lanchonete-api" {
     security_group_ids      = [
       aws_security_group.node_group_one.id
     ]
+
+    access_config {
+      authentication_mode = var.accessConfig
+    }
   }
+
   lifecycle {
     prevent_destroy = false
   }
 
-  enabled_cluster_log_types = ["api","scheduler"]
-
-  access_config {
-    authentication_mode = var.accessConfig
-  }
+  enabled_cluster_log_types = ["api", "scheduler"]
 
 }
 
@@ -80,12 +81,12 @@ resource "aws_security_group" "node_group_one" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-#  disk_size      = 20
+  #  disk_size      = 20
 
   # remote_access {
   #   ec2_ssh_key = var.ssh_key_name
   #   # source_security_group_ids = [aws_security_group.basic_app_sg.id]
   # }
 
-#  ami_type = "AL2_x86_64"
+  #  ami_type = "AL2_x86_64"
 }
