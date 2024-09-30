@@ -7,7 +7,7 @@
 
 resource "kubernetes_deployment" "deployment_lanchonete_api" {
   metadata {
-    name      = var.cluster_name
+    name      = "${var.cluster_name}-deploy"
     #    namespace = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
     namespace = var.kubernetes_namespace
   }
@@ -74,29 +74,29 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
 
 }
 
-resource "kubernetes_service" "lanchonete_api_service" {
-  metadata {
-    name      = var.cluster_name
-    #    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
-    namespace = var.kubernetes_namespace
-    #    annotations = {
-    #      "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
-    #      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
-    #      "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled" : "true"
-    #    }
-  }
-  spec {
-    selector = {
-      app = "lanchonete-api"
-    }
-    port {
-      port        = 8080
-      target_port = 8080
-      node_port   = 30000
-    }
-    type = "LoadBalancer"
-  }
-}
+#resource "kubernetes_service" "lanchonete_api_service" {
+#  metadata {
+#    name      = var.cluster_name
+#    #    namespace   = kubernetes_namespace.lanchonete_api_namespace.metadata.0.name
+#    namespace = var.kubernetes_namespace
+#    #    annotations = {
+#    #      "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
+#    #      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
+#    #      "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled" : "true"
+#    #    }
+#  }
+#  spec {
+#    selector = {
+#      app = "lanchonete-api"
+#    }
+#    port {
+#      port        = 8080
+#      target_port = 8080
+#      node_port   = 30000
+#    }
+#    type = "LoadBalancer"
+#  }
+#}
 #
 ## Failed to create Ingress 'default/ingress-lanchonete-api' because: the server could not find the requested resource (post ingresses.extensions)
 ## So let's use kubernetes_ingress_v1 instead of kubernetes_ingress

@@ -2,7 +2,8 @@ variable "node_role_arn" {
   description = "ARN of the IAM Role that will be associated with the Node Group"
   type        = string
   sensitive   = true
-  default     = "arn:aws:iam::638385053556:role/LabRole"
+#  default     = "arn:aws:iam::638385053556:role/LabRole"
+  default     = "arn:aws:iam::578360598759:role/role-adm"
 }
 
 variable "environment" {
@@ -38,7 +39,7 @@ variable "datatabase_lanchonete_api_name" {
 }
 
 variable "principalArn" {
-  default = "arn:aws:iam::257266759997:role/voclabs"
+  default = "arn:aws:iam::578360598759:role/role-adm"
 }
 
 variable "policyArn" {
@@ -46,9 +47,9 @@ variable "policyArn" {
 }
 
 variable "accessConfig" {
-  default = "API_AND_CONFIG_MAP"
+  default = "API"
 }
 
 variable "awsRegion" {
-  default = "us-east-1"
+  default = "sa-east-1"
 }
