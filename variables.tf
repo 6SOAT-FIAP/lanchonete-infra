@@ -6,13 +6,6 @@ variable "node_role_arn" {
   default     = "arn:aws:iam::578360598759:role/role-adm"
 }
 
-variable "environment" {
-  description = "The environment of the application"
-  type        = string
-  # Environments are often things such as development, integration, or production.
-  default     = "development"
-}
-
 variable "kubernetes_namespace" {
   description = "The Kubernetes namespace where the resources will be provisioned"
   type        = string

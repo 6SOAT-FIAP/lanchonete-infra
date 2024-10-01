@@ -39,7 +39,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_api" {
         }
         restart_policy = "Always"
         container {
-          name              = "lanchonete"
+          name              = "lanchonete-api"
           image             = "luhanlacerda/lanchonete-api:latest"
           image_pull_policy = "Always"
 

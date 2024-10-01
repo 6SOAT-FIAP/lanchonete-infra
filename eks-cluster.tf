@@ -1,6 +1,6 @@
 # EKS Cluster
 resource "aws_eks_cluster" "lanchonete-api" {
-  name     = "module-eks-${var.cluster_name}"
+  name     = "eks-${var.cluster_name}"
   role_arn = var.node_role_arn
 
   vpc_config {
