@@ -1,10 +1,7 @@
 name: AWS - Cria infraestrutura
 
 on:
-  #workflow_dispatch:
-  push:
-    branches:
-      - feature/**
+  workflow_dispatch:
 
 jobs:
   terraform:
