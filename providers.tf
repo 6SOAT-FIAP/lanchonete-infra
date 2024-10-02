@@ -20,11 +20,11 @@ provider "aws" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = "lanchonete-cluster"
+  name = "eks-lanchonete-api"
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = "lanchonete-cluster"
+  name = "eks-lanchonete-api"
 }
 
 provider "kubernetes" {
