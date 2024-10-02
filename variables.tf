@@ -107,7 +107,7 @@ variable "kubernetes_namespace" {
 variable "cluster_name" {
   description = "Name of the EKS Cluster"
   type        = string
-  default     = "lanchonete-cluster"
+  default     = "eks-lanchonete-api"
 }
 
 variable "instance_type" {

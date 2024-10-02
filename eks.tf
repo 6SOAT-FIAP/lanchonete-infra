@@ -1,6 +1,6 @@
 # EKS Cluster
 resource "aws_eks_cluster" "lanchonete_cluster" {
-  name     = "lanchonete-cluster"
+  name     = "eks-lanchonete-api"
   role_arn = "arn:aws:iam::578360598759:role/role-adm"
 
   vpc_config {
@@ -19,13 +19,9 @@ resource "aws_eks_cluster" "lanchonete_cluster" {
   }
 }
 
-data "aws_eks_cluster_auth" "lanchonete_cluster_auth" {
-  name = aws_eks_cluster.lanchonete_cluster.name
-}
-
 # EKS Node Group
 resource "aws_eks_node_group" "lanchonete_node_group" {
-  cluster_name    = "lanchonete-cluster"
+  cluster_name    = "eks-lanchonete-api"
   node_group_name = "lanchonete_node_group"
   node_role_arn   = "arn:aws:iam::578360598759:role/role-adm"
   subnet_ids      = [
