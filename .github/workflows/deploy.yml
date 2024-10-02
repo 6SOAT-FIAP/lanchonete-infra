@@ -16,7 +16,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Load environment variables
@@ -37,7 +36,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: bash terraform.sh plan
+        run: TF_LOG=DEBUG bash terraform.sh plan
 
       - name: Terraform Apply
         run: bash terraform.sh apply -auto-approve

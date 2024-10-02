@@ -1,7 +1,7 @@
 # EKS Cluster
 resource "aws_eks_cluster" "lanchonete_cluster" {
   name     = var.cluster_name
-  role_arn = var.node_role_arn
+  role_arn = "arn:aws:iam::578360598759:role/role-adm"
 
   vpc_config {
     subnet_ids = [
@@ -27,7 +27,7 @@ data "aws_eks_cluster_auth" "lanchonete_cluster_auth" {
 resource "aws_eks_node_group" "lanchonete_node_group" {
   cluster_name    = var.cluster_name
   node_group_name = "lanchonete_node_group"
-  node_role_arn   = var.node_role_arn
+  node_role_arn   = "arn:aws:iam::578360598759:role/role-adm"
   subnet_ids      = [
     aws_subnet.lanchonete_private_subnet_1.id,
     aws_subnet.lanchonete_private_subnet_2.id
