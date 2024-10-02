@@ -10,7 +10,7 @@ resource "aws_vpc" "lanchonete_vpc" {
 # Public Subnets
 resource "aws_subnet" "lanchonete_public_subnet_1" {
   vpc_id            = aws_vpc.lanchonete_vpc.id
-  cidr_block        = var.subnet_public_1_cidr_block
+  cidr_block        = "10.0.1.0/24"
   availability_zone = var.subnet_availability_zone_az_1
 
   tags = {
@@ -20,7 +20,7 @@ resource "aws_subnet" "lanchonete_public_subnet_1" {
 
 resource "aws_subnet" "lanchonete_public_subnet_2" {
   vpc_id            = aws_vpc.lanchonete_vpc.id
-  cidr_block        = var.subnet_public_2_cidr_block
+  cidr_block        = "10.0.2.0/24"
   availability_zone = var.subnet_availability_zone_az_2
 
   tags = {
@@ -31,7 +31,7 @@ resource "aws_subnet" "lanchonete_public_subnet_2" {
 # Private Subnets
 resource "aws_subnet" "lanchonete_private_subnet_1" {
   vpc_id            = aws_vpc.lanchonete_vpc.id
-  cidr_block        = var.subnet_private_1_cidr_block
+  cidr_block        = "10.0.3.0/24"
   availability_zone = var.subnet_availability_zone_az_1
 
   tags = {
@@ -41,7 +41,7 @@ resource "aws_subnet" "lanchonete_private_subnet_1" {
 
 resource "aws_subnet" "lanchonete_private_subnet_2" {
   vpc_id            = aws_vpc.lanchonete_vpc.id
-  cidr_block        = var.subnet_private_2_cidr_block
+  cidr_block        = "10.0.4.0/24"
   availability_zone = var.subnet_availability_zone_az_2
 
   tags = {
