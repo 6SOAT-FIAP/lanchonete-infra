@@ -37,7 +37,7 @@ resource "kubernetes_config_map" "cm_lanchonete" {
 resource "kubernetes_deployment" "deployment_lanchonete_app" {
   metadata {
     name      = "deployment-lanchonete-app"
-    namespace = var.kubernetes_namespace
+    namespace = "default"
   }
 
   spec {
@@ -116,7 +116,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_app" {
 resource "kubernetes_service" "lanchonete_app_service" {
   metadata {
     name      = "service-lanchonete-app"
-    namespace = var.kubernetes_namespace
+    namespace = "default"
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type" : "nlb",
       "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal",
@@ -140,7 +140,7 @@ resource "kubernetes_service" "lanchonete_app_service" {
 resource "kubernetes_ingress_v1" "lanchonete_app_ingress" {
   metadata {
     name      = "ingress-lanchonete-app"
-    namespace = var.kubernetes_namespace
+    namespace = "default"
   }
 
   spec {
