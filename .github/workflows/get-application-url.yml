@@ -11,7 +11,6 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
     steps:
       - name: Check if AWS CLI is installed
@@ -28,10 +27,9 @@ jobs:
 
       - name: Configure AWS CLI
         run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
-          aws configure set region ${{ secrets.AWS_REGION }}
+               aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+               aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+               aws configure set region ${{ secrets.AWS_REGION }}
 
       - name: Get All Load Balancer DNS Name
         id: get_lb_dns
