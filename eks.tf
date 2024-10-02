@@ -1,6 +1,6 @@
 # EKS Cluster
 resource "aws_eks_cluster" "lanchonete_cluster" {
-  name     = var.cluster_name
+  name     = "lanchonete-cluster"
   role_arn = "arn:aws:iam::578360598759:role/role-adm"
 
   vpc_config {
@@ -25,7 +25,7 @@ data "aws_eks_cluster_auth" "lanchonete_cluster_auth" {
 
 # EKS Node Group
 resource "aws_eks_node_group" "lanchonete_node_group" {
-  cluster_name    = var.cluster_name
+  cluster_name    = "lanchonete-cluster"
   node_group_name = "lanchonete_node_group"
   node_role_arn   = "arn:aws:iam::578360598759:role/role-adm"
   subnet_ids      = [
@@ -72,7 +72,7 @@ resource "aws_eks_node_group" "lanchonete_node_group" {
 
 # Security group to EKS Cluster
 resource "aws_security_group" "eks_security_group" {
-  vpc_id = aws_vpc.lanchonete_vpc.id
+  vpc_id      = aws_vpc.lanchonete_vpc.id
   description = "Allow traffic for EKS Cluster (lanchonete)"
 
   ingress {
@@ -90,7 +90,7 @@ resource "aws_security_group" "eks_security_group" {
   }
 
   tags = {
-    Name        = "${var.cluster_name}-sg"
+    Name        = "lanchonete-cluster-sg"
     Environment = var.environment
   }
 }
