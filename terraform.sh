@@ -25,7 +25,7 @@ terraform $METHOD $PARAMS \
 -var "image_username=$DOCKERHUB_USERNAME" \
 -var "image_version=$IMAGE_VERSION" \
 -var "app_port=$APP_PORT" \
--var "enable_flyway=$ENABLE_FLYWAY" \
+-var "enable_flyway=true" \
 -var "aws_region=$AWS_REGION" \
 -var "node_role_arn=$ARN_AWS_LAB_ROLE" \
 -var "vpc_name=$VPC_NAME" \
