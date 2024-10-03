@@ -19,6 +19,10 @@ resource "aws_eks_cluster" "lanchonete_cluster" {
   }
 }
 
+data "aws_eks_cluster_auth" "lanchonete_cluster_auth" {
+  name = aws_eks_cluster.lanchonete_cluster.name
+}
+
 # EKS Node Group
 resource "aws_eks_node_group" "lanchonete_node_group" {
   cluster_name    = "eks-lanchonete-api"
