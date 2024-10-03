@@ -6,7 +6,7 @@ resource "kubernetes_secret" "secret_lanchonete" {
   type = "Opaque"
 
   data = {
-    APPLICATION_VERSION          = var.image_version
+    APPLICATION_VERSION          = "latest"
     APPLICATION_DATABASE_VERSION = "latest"
     APPLICATION_PORT             = var.app_port
     SPRING_DATASOURCE_USERNAME   = var.db_username
@@ -68,7 +68,7 @@ resource "kubernetes_deployment" "deployment_lanchonete_app" {
 
         container {
           name  = "deployment-lanchonete-app-container"
-          image = "${var.image_username}/${var.image_name}:${var.image_version}"
+          image = "${var.image_username}/${var.image_name}:latest"
 
           resources {
             requests = {
