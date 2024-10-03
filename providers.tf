@@ -8,6 +8,9 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "~> 2.32.0"
     }
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
   }
 
   required_version = ">= 1.2.0"
@@ -36,9 +39,6 @@ provider "helm" {
 }
 
 provider "kubernetes" {
-  experiments {
-    manifest_resource = true
-  }
   #  host                   = aws_eks_cluster.lanchonete_cluster.endpoint
   #  cluster_ca_certificate = base64decode(aws_eks_cluster.lanchonete_cluster.certificate_authority[0].data)
   #  token                  = data.aws_eks_cluster_auth.lanchonete_cluster_auth.token
