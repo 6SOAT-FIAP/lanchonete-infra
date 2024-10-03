@@ -43,32 +43,22 @@ resource "aws_eks_node_group" "lanchonete_node_group" {
     prevent_destroy = false
   }
 
-  instance_types = [var.instance_type]
+  instance_types = ["t3.medium"]
   disk_size      = 20
-
-  # remote_access {
-  #   ec2_ssh_key = var.ssh_key_name
-  #   # source_security_group_ids = [aws_security_group.lanchonete_sg.id]
-  # }
 
   ami_type = "AL2_x86_64"
 
   depends_on = [aws_eks_cluster.lanchonete_cluster]
 
   labels = {
-    environment = var.environment
+    environment = "development"
   }
 
   tags = {
     Name        = "lanchonete_node_group"
-    Environment = var.environment
+    Environment = "development"
   }
 }
-
-# resource "aws_key_pair" "lanchonete_ssh_key" {
-#   key_name   = var.ssh_key_name
-#   public_key = file("${var.ssh_key}.pub")
-# }
 
 # Security group to EKS Cluster
 resource "aws_security_group" "eks_security_group" {
@@ -91,6 +81,6 @@ resource "aws_security_group" "eks_security_group" {
 
   tags = {
     Name        = "lanchonete-cluster-sg"
-    Environment = var.environment
+    Environment = "development"
   }
 }
