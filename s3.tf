@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "lanchonete-bucket"
-    key    = "api/terraform.tfstate"
+    key    = "infra.tfstate"
     region = "sa-east-1"
   }
 }
